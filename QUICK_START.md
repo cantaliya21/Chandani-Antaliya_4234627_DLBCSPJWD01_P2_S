@@ -73,9 +73,4 @@ The browser should automatically open to `http://localhost:3000`
 - Run `npm install` in both server and client directories
 - Ensure Node.js version is 18.x or higher
 
-## 📝 Next Steps
 
-- Review the README.md for detailed documentation
-- Check TEST_CASES.md for test scenarios
-- Customize styles in CSS files
-- Add more features as needed
