@@ -1,0 +1,222 @@
+/**
+ * TaskStats — glassmorphism cards + animated progress bar
+ */
+
+.task-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-lg);
+  animation: fadeSlideUp 0.5s ease both;
+}
+
+/* ── Stat Card ───────────────────────────────────────────────────── */
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: var(--sp-md);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  transition: transform var(--transition-bounce), box-shadow var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary);
+  border-radius: var(--radius) var(--radius) 0 0;
+  transition: height var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-card:hover::before {
+  height: 5px;
+}
+
+.stat-card.completed::before {
+  background: var(--success);
+}
+
+.stat-card.pending::before {
+  background: var(--warning);
+}
+
+.stat-card.progress::before {
+  background: linear-gradient(90deg, var(--primary), #a855f7);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  animation: float 4s ease-in-out infinite;
+}
+
+.stat-card.completed .stat-icon {
+  animation-delay: 0.5s;
+}
+
+.stat-card.pending .stat-icon {
+  animation-delay: 1s;
+}
+
+.stat-card.progress .stat-icon {
+  animation-delay: 1.5s;
+}
+
+.stat-value {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--text-1);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-2);
+  margin-top: 3px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Progress Bar ────────────────────────────────────────────────── */
+.progress-section {
+  grid-column: 1 / -1;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: var(--sp-md) var(--sp-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeSlideUp 0.6s 0.1s ease both;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.progress-percent {
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.progress-track {
+  height: 10px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--primary) 0%, #a855f7 60%, #ec4899 100%);
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease infinite, progressFill 1s ease-out both;
+  box-shadow: 0 0 10px var(--primary-glow);
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Priority breakdown */
+.priority-breakdown {
+  grid-column: 1 / -1;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: var(--sp-sm) var(--sp-lg);
+  display: flex;
+  gap: var(--sp-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeSlideUp 0.6s 0.15s ease both;
+}
+
+.priority-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  font-size: 0.88rem;
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+.priority-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.priority-item.high .priority-dot {
+  background: var(--danger);
+  box-shadow: 0 0 6px var(--danger-glow);
+}
+
+.priority-item.medium .priority-dot {
+  background: var(--warning);
+  box-shadow: 0 0 6px var(--warning-glow);
+}
+
+.priority-item.low .priority-dot {
+  background: var(--success);
+  box-shadow: 0 0 6px var(--success-glow);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .task-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .task-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-xs);
+  }
+
+  .stat-card {
+    padding: var(--sp-sm);
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,212 @@
+/**
+ * TaskForm — glassmorphism card, shimmer button, animated inputs
+ */
+
+.task-form-container {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: var(--sp-lg);
+  margin-bottom: var(--sp-lg);
+  animation: fadeSlideUp 0.5s 0.2s ease both;
+  transition: box-shadow var(--transition);
+}
+
+.task-form-container:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.task-form-container h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-1);
+  margin-bottom: var(--sp-md);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.task-form-container h2 span.form-icon {
+  font-size: 1.4rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ── Keyboard hint ───────────────────────────────────────────────── */
+.kbd-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--border);
+  padding: 2px 7px;
+  border-radius: 6px;
+  margin-left: auto;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ── Form Layout ─────────────────────────────────────────────────── */
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 0.7rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.97rem;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-1);
+  transition: all var(--transition);
+  outline: none;
+}
+
+.app.dark-mode .form-group input,
+.app.dark-mode .form-group textarea,
+.app.dark-mode .form-group select {
+  background: rgba(30, 27, 75, 0.5);
+  color: var(--text-1);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.app.dark-mode .form-group input:focus,
+.app.dark-mode .form-group textarea:focus,
+.app.dark-mode .form-group select:focus {
+  background: rgba(30, 27, 75, 0.8);
+}
+
+.form-group input.error {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px var(--danger-glow);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 76px;
+}
+
+.form-group input:disabled,
+.form-group textarea:disabled,
+.form-group select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.form-error {
+  color: var(--danger);
+  font-size: 0.88rem;
+  padding: var(--sp-sm);
+  background: rgba(239, 68, 68, 0.08);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  animation: popIn 0.3s ease both;
+}
+
+/* ── Shimmer Submit Button ───────────────────────────────────────── */
+.submit-button {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 50%, #a855f7 100%);
+  background-size: 200% 200%;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-bounce);
+  align-self: flex-start;
+  box-shadow: 0 4px 16px var(--primary-glow);
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.4s ease;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 24px var(--primary-glow);
+  background-position: right center;
+}
+
+.submit-button:hover:not(:disabled)::after {
+  left: 130%;
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.submit-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .task-form-container {
+    padding: var(--sp-md);
+    border-radius: var(--radius);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .submit-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 16px;
+  }
+
+  .kbd-hint {
+    display: none;
+  }
+}

@@ -1,0 +1,189 @@
+/**
+ * App Shell Styles — animated header, quote bar, layout
+ */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  transition: background var(--transition);
+}
+
+/* ── Header ──────────────────────────────────────────────────────── */
+.app-header {
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 40%, #8b5cf6 70%, #a855f7 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+  color: white;
+  padding: var(--sp-lg) 0 0;
+  box-shadow: 0 4px 32px rgba(79, 70, 229, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated mesh overlay */
+.app-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.app.dark-mode .app-header {
+  background: linear-gradient(135deg, #1e1b4b 0%, #2d2a6e 40%, #3730a3 70%, #4c1d95 100%);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.5);
+}
+
+.header-content {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 var(--sp-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-md);
+}
+
+.header-title h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.header-title .subtitle {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+.header-actions {
+  display: flex;
+  gap: var(--sp-sm);
+  align-items: center;
+}
+
+.theme-toggle {
+  width: 46px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  font-size: 1.3rem;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-bounce);
+  backdrop-filter: blur(6px);
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: scale(1.12) rotate(15deg);
+}
+
+.logout-button {
+  padding: 0.55rem 1.3rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  backdrop-filter: blur(6px);
+  letter-spacing: 0.2px;
+}
+
+.logout-button:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Quote Bar ───────────────────────────────────────────────────── */
+.quote-bar {
+  max-width: 1040px;
+  margin: var(--sp-md) auto 0;
+  padding: 0 var(--sp-md) var(--sp-md);
+  text-align: center;
+  min-height: 28px;
+}
+
+.quote-text {
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.88;
+  animation: quoteSlide 8s ease-in-out infinite;
+}
+
+/* ── Main ────────────────────────────────────────────────────────── */
+.app-main {
+  flex: 1;
+  padding: var(--sp-lg) 0;
+  background: var(--bg);
+  animation: fadeSlideUp 0.5s var(--transition) both;
+}
+
+/* ── Messages ────────────────────────────────────────────────────── */
+.loading-message {
+  text-align: center;
+  padding: var(--sp-lg);
+  color: var(--primary);
+  animation: fadeSlideUp 0.4s ease both;
+}
+
+.error-banner {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1.5px solid var(--danger);
+  color: var(--danger);
+  padding: var(--sp-sm) var(--sp-md);
+  border-radius: var(--radius);
+  margin: var(--sp-md) 0;
+  text-align: center;
+  animation: popIn 0.35s ease both;
+}
+
+.app.dark-mode .error-banner {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* ── Footer ──────────────────────────────────────────────────────── */
+.app-footer {
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+  padding: var(--sp-md);
+  text-align: center;
+  color: var(--text-2);
+  font-size: 0.875rem;
+  transition: background var(--transition);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .header-title h1 {
+    font-size: 1.8rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .app-main {
+    padding: var(--sp-md) 0;
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "task-manager-server",
+  "version": "1.0.0",
+  "description": "Express backend for task manager application",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "express",
+    "rest-api",
+    "task-manager"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "sql.js": "^1.14.0",
+    "uuid": "^9.0.1"
+  }
+}

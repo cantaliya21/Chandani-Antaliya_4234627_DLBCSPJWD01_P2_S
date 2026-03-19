@@ -1,0 +1,17 @@
+Database loaded from file
+Database initialized successfully
+✅ Server running on http://localhost:3001
+📡 API endpoints: http://localhost:3001/api/tasks
+🗄️  Database: SQLite (sql.js)
+Attempting to insert user: {
+  userId: 'db87f233-3785-4f03-8882-c1dad7812428',
+  username: 'User01',
+  email: 'user01@gmail.com'
+}
+User inserted successfully, changes: 1
+Attempting to insert user: {
+  userId: 'd0d0bb23-6a9b-4c08-b83b-346830e744d1',
+  username: 'uitestuser',
+  email: 'uitest@example.com'
+}
+User inserted successfully, changes: 1
